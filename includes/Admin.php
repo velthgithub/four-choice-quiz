@@ -25,7 +25,7 @@ class Admin {
 		 */
 		$cmb2_box = new_cmb2_box( array(
 			'id'           => $prefix . 'metabox',
-			'title'        => __( 'Repeating Field Group', 'four-choice-quiz' ),
+			'title'        => __( 'Quiz', 'four-choice-quiz' ),
 			'object_types' => array( 'quiz', ),
 		) );
 
@@ -39,10 +39,6 @@ class Admin {
 				'add_button'    => __( 'Add Another Question', 'four-choice-quiz' ),
 				'remove_button' => __( 'Remove Question', 'four-choice-quiz' ),
 				//'sortable'      => true, // beta
-				// 'closed'     => true, // true to have the groups closed by default
-			),
-			'attributes'  => array(
-				'data-FCQ-input' => 'question',
 			),
 		) );
 
@@ -50,28 +46,50 @@ class Admin {
 		$cmb2_box->add_group_field( $box_id, array(
 			'name'       => __( 'Question', 'four-choice-quiz' ),
 			'id'         => 'question',
+			'type'       => 'textarea_small',
+		) );
+
+		$cmb2_box->add_group_field( $box_id, array(
+			'name'       => __( 'Option #1', 'four-choice-quiz' ),
+			'id'         => 'option1',
 			'type'       => 'text',
 		) );
 
 		$cmb2_box->add_group_field( $box_id, array(
-			'name'       => __( 'Choices', 'four-choice-quiz' ),
-			'id'         => 'choices',
+			'name'       => __( 'Option #2', 'four-choice-quiz' ),
+			'id'         => 'option2',
 			'type'       => 'text',
-			'repeatable' => true, // Repeatable fields are supported w/in repeatable groups (for most types)
-			'attributes'  => array(
-				'data-FCQ-input' => 'choices',
-			),
+		) );
+
+		$cmb2_box->add_group_field( $box_id, array(
+			'name'       => __( 'Option #3', 'four-choice-quiz' ),
+			'id'         => 'option3',
+			'type'       => 'text',
+		) );
+
+		$cmb2_box->add_group_field( $box_id, array(
+			'name'       => __( 'Option #4', 'four-choice-quiz' ),
+			'id'         => 'option4',
+			'type'       => 'text',
 		) );
 
 		$cmb2_box->add_group_field( $box_id, array(
 			'name'       => __( 'Answer No', 'four-choice-quiz' ),
 			'id'         => 'answer',
-			'type'       => 'text',
+			'type'       => 'select',
+			'default'          => '1',
+			'options'          => array(
+				'1' => __( '#1',  'four-choice-quiz' ),
+				'2' => __( '#2',  'four-choice-quiz' ),
+				'3' => __( '#3',  'four-choice-quiz' ),
+				'4' => __( '#4',  'four-choice-quiz' ),
+
+			),
 		) );
 
 
 		$cmb2_box->add_group_field( $box_id, array(
-			'name'        => __( 'Comment', 'cmb2' ),
+			'name'        => __( 'Comment',  'four-choice-quiz' ),
 			'description' => __( 'Comment for selected ansswer', 'four-choice-quiz' ),
 			'id'          => 'comment',
 			'type'        => 'textarea_small',
