@@ -44,7 +44,8 @@ class PostType {
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'custom-fields' )
+			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'custom-fields' ),
+			'show_in_rest'       => true,
 		);
 
 		register_post_type( 'quiz', $args );

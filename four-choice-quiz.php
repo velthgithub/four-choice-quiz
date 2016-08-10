@@ -23,5 +23,6 @@ add_action( 'plugins_loaded', 'fcq_init' );
 function fcq_init() {
 	new Torounit\FCQ\PostType();
 	new Torounit\FCQ\Admin();
+	new Torounit\FCQ\Fields();
 }
 
