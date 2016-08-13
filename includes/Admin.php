@@ -15,12 +15,12 @@ class Admin {
 
 	public function enqueue_scripts() {
 
-		wp_enqueue_script(
-			'FCQ-admin',
-			plugins_url( 'assets/scripts/admin.js', FCQ_FILE ),
-			array( 'jquery')
-
-		);
+//		wp_enqueue_script(
+//			'FCQ-admin',
+//			plugins_url( 'assets/scripts/admin.js', FCQ_FILE ),
+//			array( 'jquery')
+//
+//		);
 	}
 
 }

@@ -4,32 +4,30 @@ namespace Torounit\FCQ;
 
 class Fields {
 
+	/** @var \CMB2 */
+	private $cmb2;
 
 	/**
 	 * Admin constructor.
 	 */
 	public function __construct() {
-		add_action( 'cmb2_admin_init', [ $this, 'register_repeatable_group_field_metabox' ] );
+		add_action( 'cmb2_admin_init', [ $this, 'register_meta_box' ] );
 		add_action( 'rest_api_init', [ $this, 'rest_api_alter' ] );
 	}
 
-
-	/**
-	 * Hook in and add a metabox to demonstrate repeatable grouped fields
-	 */
-	function register_repeatable_group_field_metabox() {
-
-		/**
-		 * Repeatable Field Groups
-		 */
-		$cmb2_box = new_cmb2_box( [
+	public function register_meta_box() {
+		$this->cmb2 = new_cmb2_box( [
 			'id'           => 'FCQ_metabox',
 			'title'        => __( 'Quiz', 'four-choice-quiz' ),
 			'object_types' => [ 'quiz', ],
 		] );
 
-		// $question_box_id is the field id string, so in this case: $prefix . 'demo'
-		$question_box_id = $cmb2_box->add_field( [
+		$this->register_questions_fields();
+		$this->register_images_fields();
+	}
+
+	public function register_questions_fields() {
+		$question_box_id = $this->cmb2->add_field( [
 			'id'      => 'FCQ_question',
 			'type'    => 'group',
 			//'description' => __( 'Generates reusable form entries', 'four-choice-quiz' ),
@@ -42,37 +40,37 @@ class Fields {
 		] );
 
 
-		$cmb2_box->add_group_field( $question_box_id, [
+		$this->cmb2->add_group_field( $question_box_id, [
 			'name' => __( 'Question', 'four-choice-quiz' ),
 			'id'   => 'question',
 			'type' => 'textarea_small',
 		] );
 
-		$cmb2_box->add_group_field( $question_box_id, [
+		$this->cmb2->add_group_field( $question_box_id, [
 			'name' => __( 'Option #1', 'four-choice-quiz' ),
 			'id'   => 'option1',
 			'type' => 'text',
 		] );
 
-		$cmb2_box->add_group_field( $question_box_id, [
+		$this->cmb2->add_group_field( $question_box_id, [
 			'name' => __( 'Option #2', 'four-choice-quiz' ),
 			'id'   => 'option2',
 			'type' => 'text',
 		] );
 
-		$cmb2_box->add_group_field( $question_box_id, [
+		$this->cmb2->add_group_field( $question_box_id, [
 			'name' => __( 'Option #3', 'four-choice-quiz' ),
 			'id'   => 'option3',
 			'type' => 'text',
 		] );
 
-		$cmb2_box->add_group_field( $question_box_id, [
+		$this->cmb2->add_group_field( $question_box_id, [
 			'name' => __( 'Option #4', 'four-choice-quiz' ),
 			'id'   => 'option4',
 			'type' => 'text',
 		] );
 
-		$cmb2_box->add_group_field( $question_box_id, [
+		$this->cmb2->add_group_field( $question_box_id, [
 			'name'    => __( 'Answer No', 'four-choice-quiz' ),
 			'id'      => 'answer',
 			'type'    => 'select',
@@ -85,15 +83,18 @@ class Fields {
 			],
 		] );
 
-		$cmb2_box->add_group_field( $question_box_id, [
+		$this->cmb2->add_group_field( $question_box_id, [
 			'name'        => __( 'Comment', 'four-choice-quiz' ),
 			'description' => __( 'Comment for selected answer', 'four-choice-quiz' ),
 			'id'          => 'comment',
 			'type'        => 'textarea_small',
 		] );
 
+	}
 
-		$image_box_id = $cmb2_box->add_field( [
+
+	public function register_images_fields() {
+		$image_box_id = $this->cmb2->add_field( [
 			'id'      => 'FCQ_images',
 			'type'    => 'group',
 			//'description' => __( 'Generates reusable form entries', 'four-choice-quiz' ),
@@ -105,7 +106,7 @@ class Fields {
 			],
 		] );
 
-		$cmb2_box->add_group_field( $image_box_id, [
+		$this->cmb2->add_group_field( $image_box_id, [
 			'name'        => __( 'Threshold', 'four-choice-quiz' ),
 			'description' => __( 'Threshold of answers for image.', 'four-choice-quiz' ),
 			'id'          => 'threshold',
@@ -118,7 +119,7 @@ class Fields {
 			],
 		] );
 
-		$cmb2_box->add_group_field( $image_box_id, [
+		$this->cmb2->add_group_field( $image_box_id, [
 			'name'    => 'Image',
 			//'desc'    => 'Upload an image or enter an URL.',
 			'id'      => 'image',
@@ -131,8 +132,8 @@ class Fields {
 				'add_upload_file_text' => 'Select Image' // Change upload button text. Default: "Add or Upload File"
 			],
 		] );
-
 	}
+
 
 	public function rest_api_alter() {
 		register_rest_field( 'quiz', 'fcq', [
