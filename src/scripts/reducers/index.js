@@ -9,15 +9,15 @@ const reducer = (state, action) => {
 }
 
 
-const wp = (state = {}, action) => {
-
+const request = (state = {}, action) => {
 
 	switch (action.type) {
 
 		case ActionType.RECEIVE_DATA :
 			return {
 				id: action.id,
-				data: action.data
+				questions: action.data.fcq.questions,
+				images: action.data.fcq.images,
 			}
 
 		default:
@@ -27,8 +27,9 @@ const wp = (state = {}, action) => {
 
 
 
+
 const reducers = combineReducers({
-	wp
+	request
 })
 
 export default reducers;

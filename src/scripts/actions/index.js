@@ -11,10 +11,11 @@ function requestData(id) {
 }
 
 function receiveData(id, data) {
+
 	return {
 		type: ActionType.RECEIVE_DATA,
 		id,
-		data,
+		data
 	}
 }
 
@@ -22,5 +23,18 @@ export function fetchData(id) {
 	return function (dispatch) {
 		dispatch(requestData(id));
 		return wpapi.quiz().id(id).then((data) => dispatch(receiveData(id, data)));
+	}
+}
+
+export function nextQuestion( index ) {
+	return {
+		type: ActionType.NEXT_QUESTION,
+		question_id: index
+	}
+}
+
+export function answerQuestion( id ) {
+	return {
+		type: ActionType.ANSWER_QUESTION,
 	}
 }

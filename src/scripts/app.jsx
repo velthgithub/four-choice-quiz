@@ -16,11 +16,16 @@ let id = container.dataset.id;
 
 store.dispatch(fetchData(id)).then(() =>
 	console.log(store.getState())
-)
+).then( () => {
+	"use strict";
 
-ReactDOM.render(
-	<Provider store={store}>
-		<App />
-	</Provider>,
-	container
-);
+	ReactDOM.render(
+		<Provider store={store}>
+			<App />
+		</Provider>,
+		container
+	);
+
+})
+
+
