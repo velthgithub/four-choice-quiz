@@ -1,29 +1,28 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-const isResult = function ( current, index ) {
+
+const isTotalResult = function ( current, index ) {
 	if( current == index ){
 		return 'active';
 	}
-
 	return 'deactive'
 }
 
-
-const Result = ({ questions, current }) => {
+const TotalResult = ({ questions, current }) => {
 	return (
-		<div className={ isResult(questions.length, current) }>
+		<div className={ isTotalResult(questions.length, current) }>
 			<h3>結果</h3>
 		</div>
 	)
 }
 
-export default Result
+export default TotalResult
 
 
 
 const mapStateToProps = (state) => {
 	return {
-		questions: state.questions.questions,
+		questions: state.questions,
 		current: state.screen.current
 	}
 }
@@ -38,4 +37,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Result)
+)(TotalResult)

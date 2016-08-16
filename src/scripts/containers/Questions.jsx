@@ -2,36 +2,47 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { answerQuestion, nextQuestion } from '../actions';
 import Question from '../components/Question';
-import Result from '../containers/Result';
+import TotalResult from '../containers/TotalResult';
 
-const questionStateClassName = function ( current, index ) {
-	if( current == index ){
-		return 'current';
-	}
-	else if( current > index ) {
-		return 'prev'
-	}
-	else {
-		return 'next'
-	}
-}
+
+
 
 class Questions extends React.Component {
 
+	questionStateClassName( current, index ) {
+		if( current == index ){
+			return 'current';
+		}
+		else if( current > index ) {
+			return 'prev'
+		}
+		else {
+			return 'next'
+		}
+	}
+
+	isLast( index ) {
+		let { questions } = this.props;
+		return ( questions.length === index + 1 );
+	}
+
 	render() {
-		let { questions, current, onNextClick } = this.props;
+		let { questions, current, onNextClick, onOptionClick } = this.props;
 		return (
 			<div>
 				{questions.map( (question, index) =>
 					<Question
-						className={questionStateClassName(current, index)}
+						className={this.questionStateClassName(current, index)}
 						key={index}
+						questionID={index}
+						isLast={this.isLast(index)}
+						onOptionClick={onOptionClick}
 						onNextClick={() => onNextClick(index)}
 						{...question}
 					/>
 				)}
 
-				<Result />
+				<TotalResult />
 			</div>
 		);
 	}
@@ -40,7 +51,7 @@ class Questions extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		questions: state.questions.questions,
+		questions: state.questions,
 		current: state.screen.current
 	}
 }
@@ -49,8 +60,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onOptionClick: (id) => {
-			dispatch(answerQuestion(id))
+		onOptionClick: (questionID, optionID) => {
+			dispatch(answerQuestion( questionID, optionID + 1) )
 		},
 		onNextClick: (index) => {
 			dispatch(nextQuestion(index))

@@ -32,8 +32,10 @@ export function nextQuestion( index ) {
 	}
 }
 
-export function answerQuestion( id ) {
+export function answerQuestion( questionID, userAnswer ) {
 	return {
 		type: ActionType.ANSWER_QUESTION,
+		questionID: questionID,
+		userAnswer: userAnswer,
 	}
 }

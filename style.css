@@ -1,0 +1,7 @@
+.fcq .display-none {
+	display: none;
+}
+
+.fcq .current {
+	background-color: #eee;
+}

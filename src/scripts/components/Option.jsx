@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 
-const Option = ( {children} ) => {
+const Option = ( {children, onClick} ) => {
 	return (
-		<li
+		<li onClick={onClick}
 		>
 			{children}
 		</li>

@@ -16,11 +16,12 @@ class View {
 
 
 	public function enqueue_scripts() {
+		wp_enqueue_style( 'wcq', plugins_url( 'style.css', FCQ_FILE ), [], '1.0.0' );
 		wp_enqueue_script(
 			'fcq',
 			plugins_url( 'bundle.js', FCQ_FILE ),
 			[ 'jquery', 'underscore' ],
-			false,
+			'1.0.0',
 			true
 		);
 	}

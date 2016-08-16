@@ -46,7 +46,7 @@ class RestAPI {
 	public function get_questions( $data, $field, $request, $type ) {
 		$questions = get_post_meta( $data['id'], 'FCQ_question', true );
 
-		return array_map( [ $this, 'modify_question_data' ], $questions );
+		return array_map( [ $this, 'modify_question_data' ], $questions, array_keys( $questions) );
 
 	}
 
@@ -54,7 +54,7 @@ class RestAPI {
 	 * @param array $question
 	 * @return array
 	 */
-	public function modify_question_data( $question ) {
+	public function modify_question_data( $question, $id ) {
 		$question['options'] = [
 			$question['option1'],
 			$question['option2'],
@@ -62,6 +62,11 @@ class RestAPI {
 			$question['option4'],
 		];
 
+		unset( $question['option1'] );
+		unset( $question['option2'] );
+		unset( $question['option3'] );
+		unset( $question['option4'] );
+		$question['id'] = $id;
 		$question['answer'] = intval( $question['answer'] );
 
 		return $question;
