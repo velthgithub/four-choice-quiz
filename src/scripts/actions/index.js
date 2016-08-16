@@ -21,7 +21,6 @@ function receiveData(id, data) {
 
 export function fetchData(id) {
 	return function (dispatch) {
-		dispatch(requestData(id));
 		return wpapi.quiz().id(id).then((data) => dispatch(receiveData(id, data)));
 	}
 }
@@ -29,7 +28,7 @@ export function fetchData(id) {
 export function nextQuestion( index ) {
 	return {
 		type: ActionType.NEXT_QUESTION,
-		question_id: index
+		questionIndex: index + 1,
 	}
 }
 
