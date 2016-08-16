@@ -42,7 +42,7 @@ class Question extends React.Component {
 					isLast={isLast}
 					isAnswered={this.isAnswered()}
 				/>
-				
+
 			</div>
 		)
 	}

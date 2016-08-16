@@ -23,7 +23,8 @@ class Questions extends React.Component {
 
 	isLast( index ) {
 		let { questions } = this.props;
-		return ( questions.length === index + 1 );
+		let result = ( questions.length == index + 1 );
+		return result;
 	}
 
 	render() {

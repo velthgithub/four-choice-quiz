@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const NextButton = ( { onNextClick, isAnswered, isLast } ) => {
+const NextButton = ( { onClick, isAnswered, isLast } ) => {
 	let message = "次の問題へ";
 	if(isLast) {
 		message= "結果を見る";
@@ -9,7 +9,7 @@ const NextButton = ( { onNextClick, isAnswered, isLast } ) => {
 	return (
 		<a
 			className="btn"
-			onClick={onNextClick}
+			onClick={onClick}
 			style={{
 				display: (isAnswered) ? 'block' : 'none'
 			}}
