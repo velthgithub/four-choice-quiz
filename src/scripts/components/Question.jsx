@@ -17,7 +17,7 @@ class Question extends React.Component {
 	}
 
 	render() {
-		let {question, options, className, isLast, onNextClick, onOptionClick, questionID, userAnswer, answer} = this.props;
+		let {question, comment, options, className, isLast, onNextClick, onOptionClick, questionID, userAnswer, answer} = this.props;
 
 		return (
 			<div className={'four-choice-quiz-question ' + className}>
@@ -39,6 +39,11 @@ class Question extends React.Component {
 					isAnswered={this.isAnswered()}
 					isCorrect={this.isCorrect()}
 				/>
+				<p
+					style={{
+						display: this.isAnswered() ? 'block' : 'none'
+					}}
+				>{comment}</p>
 				<NextButton
 					onClick={onNextClick}
 					isLast={isLast}
