@@ -35532,22 +35532,24 @@ var logger = (0, _reduxLogger2.default)();
 var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default, logger));
 
 var container = document.querySelector('.four-choice-quiz-app');
-var id = container.dataset.id;
-var currentid = container.dataset.currentid;
+if (container) {
+	var id = container.dataset.id;
+	var currentid = container.dataset.currentid;
 
-store.dispatch((0, _actions.init)(id, currentid));
+	store.dispatch((0, _actions.init)(id, currentid));
 
-store.dispatch((0, _actions.fetchData)(id)).then(function () {
-	return console.log(store.getState());
-}).then(function () {
-	"use strict";
+	store.dispatch((0, _actions.fetchData)(id)).then(function () {
+		return console.log(store.getState());
+	}).then(function () {
+		"use strict";
 
-	_reactDom2.default.render(_react2.default.createElement(
-		_reactRedux.Provider,
-		{ store: store },
-		_react2.default.createElement(_App2.default, null)
-	), container);
-});
+		_reactDom2.default.render(_react2.default.createElement(
+			_reactRedux.Provider,
+			{ store: store },
+			_react2.default.createElement(_App2.default, null)
+		), container);
+	});
+}
 
 },{"./actions":246,"./components/App":248,"./reducers":256,"react":207,"react-dom":55,"react-redux":58,"redux":216,"redux-logger":209,"redux-thunk":210}],248:[function(require,module,exports){
 'use strict';
