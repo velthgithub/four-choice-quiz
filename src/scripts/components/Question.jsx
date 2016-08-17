@@ -4,6 +4,7 @@ import Result from './Result'
 import NextButton from './NextButton'
 
 
+
 class Question extends React.Component {
 
 	isAnswered() {
@@ -23,15 +24,15 @@ class Question extends React.Component {
 			<div className={'four-choice-quiz-question ' + className}>
 				<h3>{question}</h3>
 				<ol className="four-choice-quiz-question__options">
-					{options.map((option, index) =>
+					{options.map((option) =>
 						<Option
-							key={index}
-							onClick={() => onOptionClick(questionID, index)}
+							key={option.index}
+							onClick={() => onOptionClick(questionID, option.index)}
 							isAnswered={this.isAnswered()}
-							isSelected={(userAnswer == index + 1)}
-							isCorrect={(answer == index + 1)}
+							isSelected={(userAnswer == option.index + 1)}
+							isCorrect={(answer == option.index + 1)}
 						>
-							{option}
+							{option.value}
 						</Option>
 					)}
 				</ol>

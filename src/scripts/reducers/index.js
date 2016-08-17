@@ -83,11 +83,16 @@ const question = (state, action) => {
 
 }
 
-
 const questions =  (state = [], action) => {
 	switch (action.type) {
 		case ActionType.RECEIVE_DATA :
-			return action.data.fcq.questions;
+			let questions = action.data.fcq.questions;
+			questions.map( (q) => {
+				q.options = q.options.map( (value, index) => ( { index, value } ) );
+				return q;
+			});
+
+			return questions;
 
 		case ActionType.ANSWER_QUESTION:
 			return state.map(s =>
