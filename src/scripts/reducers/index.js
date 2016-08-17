@@ -83,12 +83,33 @@ const question = (state, action) => {
 
 }
 
+const shuffle = (array) => {
+	let counter = array.length;
+
+	// While there are elements in the array
+	while (counter > 0) {
+		// Pick a random index
+		let index = Math.floor(Math.random() * counter);
+
+		// Decrease counter by 1
+		counter--;
+
+		// And swap the last element with it
+		let temp = array[counter];
+		array[counter] = array[index];
+		array[index] = temp;
+	}
+
+	return array;
+};
+
+
 const questions =  (state = [], action) => {
 	switch (action.type) {
 		case ActionType.RECEIVE_DATA :
 			let questions = action.data.fcq.questions;
 			questions.map( (q) => {
-				q.options = q.options.map( (value, index) => ( { index, value } ) );
+				q.options = shuffle( q.options.map( (value, index) => ( { index, value } ) ) );
 				return q;
 			});
 
