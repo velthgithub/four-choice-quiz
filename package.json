@@ -6,6 +6,7 @@
     "js:build": "browserify ./src/scripts/app.jsx  -t [ babelify ] -t [ localenvify ] --extension=jsx -o ./bundle.js",
     "js:watch": "watchify ./src/scripts/app.jsx -d -t [ babelify ] -t [ localenvify ] --extension=jsx -o ./bundle.js",
     "build": "npm run js:build",
+    "dist": "npm run js:build && gulp copy",
     "watch": "npm run js:watch",
     "start": "npm run build & npm run watch"
   },
@@ -27,6 +28,7 @@
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
     "browserify-shim": "^3.8.12",
+    "gulp": "^3.9.1",
     "localenvify": "^1.0.1",
     "watchify": "^3.7.0"
   },

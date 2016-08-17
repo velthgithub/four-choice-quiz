@@ -1,7 +1,24 @@
-.fcq .display-none {
-	display: none;
+.four-choice-quiz {
+	border: 1px solid currentColor;
+	overflow: hidden;
+
 }
 
-.fcq .current {
-	background-color: #eee;
+.four-choice-quiz__description {
+	margin: 10px 15px;
+}
+
+.four-choice-quiz-questions {
+	display: flex;
+	transform: translateX(0%);
+	transition: transform 0.3s ease-out 0s;
+}
+
+	.four-choice-quiz-questions__question {
+		min-width: 100%;
+		padding: 15px;
+		box-sizing: border-box;
+	}
+
+.four-choice-quiz .current {
 }

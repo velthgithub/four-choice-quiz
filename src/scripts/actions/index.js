@@ -10,6 +10,15 @@ function requestData(id) {
 	}
 }
 
+export function init(id, currentid) {
+	return {
+		type: ActionType.INIT,
+		id,
+		currentid
+	}
+
+}
+
 function receiveData(id, data) {
 
 	return {

@@ -18,6 +18,31 @@ const request = (state = {}, action) => {
 	}
 }
 
+const page = ( state = { id: 0, permalink: ''}, action ) => {
+	switch (action.type) {
+
+		case ActionType.INIT :
+			return {
+				id: action.id,
+				currentid: action.currentid
+			}
+
+		default:
+			return state
+	}
+}
+
+const resultImages = (state = [], action) => {
+	switch (action.type) {
+		case ActionType.RECEIVE_DATA :
+			return action.data.fcq.images;
+
+		default:
+			return state;
+
+	}
+}
+
 
 const screen = ( state = {
 	current: 0,
@@ -47,7 +72,8 @@ const question = (state, action) => {
 				state.userAnswer = action.userAnswer;
 			}
 
-			//state.userAnswer = action.userAnswer;
+			//for debug.
+			state.userAnswer = action.userAnswer;
 
 			return state;
 
@@ -56,6 +82,7 @@ const question = (state, action) => {
 	}
 
 }
+
 
 const questions =  (state = [], action) => {
 	switch (action.type) {
@@ -81,9 +108,11 @@ const questions =  (state = [], action) => {
 
 
 const reducers = combineReducers({
-	request,
+	page,
 	questions,
 	screen,
+	resultImages,
+	request,
 })
 
 export default reducers;

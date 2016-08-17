@@ -2,9 +2,6 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { answerQuestion, nextQuestion } from '../actions';
 import Question from '../components/Question';
-import TotalResult from '../containers/TotalResult';
-
-
 
 
 class Questions extends React.Component {
@@ -21,6 +18,11 @@ class Questions extends React.Component {
 		}
 	}
 
+	getCurrentPositon() {
+		let { current } = this.props;
+		return - 1 * 100 * current;
+	}
+
 	isLast( index ) {
 		let { questions } = this.props;
 		let result = ( questions.length == index + 1 );
@@ -29,11 +31,17 @@ class Questions extends React.Component {
 
 	render() {
 		let { questions, current, onNextClick, onOptionClick } = this.props;
+		let position = - 1 * 100 * current;
 		return (
-			<div>
+			<div
+				className="four-choice-quiz-questions"
+				style={{
+					transform: 'translateX(' + position +  '%)'
+				}}
+			>
 				{questions.map( (question, index) =>
 					<Question
-						className={this.questionStateClassName(current, index)}
+						className={'four-choice-quiz-questions__question ' + this.questionStateClassName(current, index)}
 						key={index}
 						questionID={index}
 						isLast={this.isLast(index)}
@@ -43,7 +51,6 @@ class Questions extends React.Component {
 					/>
 				)}
 
-				<TotalResult />
 			</div>
 		);
 	}

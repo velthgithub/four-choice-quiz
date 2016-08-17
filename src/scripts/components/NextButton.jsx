@@ -1,9 +1,16 @@
 import React, { PropTypes } from 'react'
+import GoResult from '../containers/GoResult'
 
 const NextButton = ( { onClick, isAnswered, isLast } ) => {
-	let message = "次の問題へ";
+
 	if(isLast) {
-		message= "結果を見る";
+		return (
+			<GoResult
+				className="btn"
+				isAnswered={isAnswered}
+
+			/>
+		)
 	}
 
 	return (
@@ -13,7 +20,7 @@ const NextButton = ( { onClick, isAnswered, isLast } ) => {
 			style={{
 				display: (isAnswered) ? 'block' : 'none'
 			}}
-		>{message}</a>
+		>次の問題へ</a>
 	);
 
 };
