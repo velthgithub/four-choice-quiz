@@ -36057,10 +36057,12 @@ var Questions = function (_React$Component) {
 				questions.map(function (question, index) {
 					return _react2.default.createElement(
 						'div',
-						{ className: 'four-choice-quiz-questions__item' },
+						{
+							className: 'four-choice-quiz-questions__item',
+							key: index
+						},
 						_react2.default.createElement(_Question2.default, _extends({
 							className: _this2.questionStateClassName(current, index),
-							key: index,
 							questionID: index,
 							isLast: _this2.isLast(index),
 							onOptionClick: onOptionClick,
@@ -36195,7 +36197,7 @@ var question = function question(state, action) {
 			}
 
 			//for debug.
-			state.userAnswer = action.userAnswer;
+			//state.userAnswer = action.userAnswer;
 
 			return state;
 
