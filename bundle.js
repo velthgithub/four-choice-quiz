@@ -35663,10 +35663,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Option = function Option(_ref) {
 	var children = _ref.children;
 	var onClick = _ref.onClick;
+	var isCorrect = _ref.isCorrect;
+	var isSelected = _ref.isSelected;
+	var isAnswered = _ref.isAnswered;
+
+	var className = 'four-choice-quiz-question__option';
+	if (isAnswered) {
+		if (isCorrect) {
+			className = className + ' four-choice-quiz-question__option--correct';
+		}
+
+		if (isSelected && !isCorrect) {
+			className = className + ' four-choice-quiz-question__option--incorrect';
+		}
+	}
 
 	return _react2.default.createElement(
 		'li',
-		{ onClick: onClick
+		{
+			className: className,
+			onClick: onClick
 		},
 		children
 	);
@@ -35740,6 +35756,8 @@ var Question = function (_React$Component) {
 	}, {
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
 			var _props2 = this.props;
 			var question = _props2.question;
 			var options = _props2.options;
@@ -35748,23 +35766,21 @@ var Question = function (_React$Component) {
 			var onNextClick = _props2.onNextClick;
 			var onOptionClick = _props2.onOptionClick;
 			var questionID = _props2.questionID;
+			var userAnswer = _props2.userAnswer;
+			var answer = _props2.answer;
 
 
 			return _react2.default.createElement(
 				'div',
-				{ className: className },
+				{ className: 'four-choice-quiz-question ' + className },
 				_react2.default.createElement(
 					'h3',
 					null,
 					question
 				),
-				_react2.default.createElement(_Result2.default, {
-					isAnswered: this.isAnswered(),
-					isCorrect: this.isCorrect()
-				}),
 				_react2.default.createElement(
-					'ul',
-					null,
+					'ol',
+					{ className: 'four-choice-quiz-question__options' },
 					options.map(function (option, index) {
 						return _react2.default.createElement(
 							_Option2.default,
@@ -35772,12 +35788,19 @@ var Question = function (_React$Component) {
 								key: index,
 								onClick: function onClick() {
 									return onOptionClick(questionID, index);
-								}
+								},
+								isAnswered: _this2.isAnswered(),
+								isSelected: userAnswer == index + 1,
+								isCorrect: answer == index + 1
 							},
 							option
 						);
 					})
 				),
+				_react2.default.createElement(_Result2.default, {
+					isAnswered: this.isAnswered(),
+					isCorrect: this.isCorrect()
+				}),
 				_react2.default.createElement(_NextButton2.default, {
 					onClick: onNextClick,
 					isLast: isLast,
@@ -35793,13 +35816,13 @@ var Question = function (_React$Component) {
 exports.default = Question;
 
 },{"./NextButton":249,"./Option":250,"./Result":252,"react":207}],252:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -35811,20 +35834,24 @@ var Result = function Result(_ref) {
 
 
 	if (!isAnswered) {
-		return _react2.default.createElement('div', null);
+		return _react2.default.createElement("div", { className: "four-choice-quiz-question__result four-choice-quiz-question__result--empty" });
 	}
 
 	if (isCorrect) {
 		return _react2.default.createElement(
-			'div',
-			null,
-			'正解！'
+			"div",
+			{
+				className: "four-choice-quiz-question__result four-choice-quiz-question__result--correct"
+			},
+			"正解！"
 		);
 	} else {
 		return _react2.default.createElement(
-			'div',
-			null,
-			'不正解！'
+			"div",
+			{
+				className: "four-choice-quiz-question__result four-choice-quiz-question__result--incorrect"
+			},
+			"不正解！"
 		);
 	}
 };
@@ -36028,16 +36055,20 @@ var Questions = function (_React$Component) {
 					}
 				},
 				questions.map(function (question, index) {
-					return _react2.default.createElement(_Question2.default, _extends({
-						className: 'four-choice-quiz-questions__question ' + _this2.questionStateClassName(current, index),
-						key: index,
-						questionID: index,
-						isLast: _this2.isLast(index),
-						onOptionClick: onOptionClick,
-						onNextClick: function onNextClick() {
-							return _onNextClick(index);
-						}
-					}, question));
+					return _react2.default.createElement(
+						'div',
+						{ className: 'four-choice-quiz-questions__item' },
+						_react2.default.createElement(_Question2.default, _extends({
+							className: _this2.questionStateClassName(current, index),
+							key: index,
+							questionID: index,
+							isLast: _this2.isLast(index),
+							onOptionClick: onOptionClick,
+							onNextClick: function onNextClick() {
+								return _onNextClick(index);
+							}
+						}, question))
+					);
 				})
 			);
 		}
