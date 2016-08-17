@@ -35760,6 +35760,7 @@ var Question = function (_React$Component) {
 
 			var _props2 = this.props;
 			var question = _props2.question;
+			var comment = _props2.comment;
 			var options = _props2.options;
 			var className = _props2.className;
 			var isLast = _props2.isLast;
@@ -35801,6 +35802,15 @@ var Question = function (_React$Component) {
 					isAnswered: this.isAnswered(),
 					isCorrect: this.isCorrect()
 				}),
+				_react2.default.createElement(
+					'p',
+					{
+						style: {
+							display: this.isAnswered() ? 'block' : 'none'
+						}
+					},
+					comment
+				),
 				_react2.default.createElement(_NextButton2.default, {
 					onClick: onNextClick,
 					isLast: isLast,
