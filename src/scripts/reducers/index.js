@@ -73,7 +73,7 @@ const question = (state, action) => {
 			}
 
 			//for debug.
-			state.userAnswer = action.userAnswer;
+			//state.userAnswer = action.userAnswer;
 
 			return state;
 

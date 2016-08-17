@@ -40,10 +40,12 @@ class Questions extends React.Component {
 				}}
 			>
 				{questions.map( (question, index) =>
-					<div className="four-choice-quiz-questions__item">
+					<div
+						className="four-choice-quiz-questions__item"
+						key={index}
+					>
 						<Question
 							className={this.questionStateClassName(current, index)}
-							key={index}
 							questionID={index}
 							isLast={this.isLast(index)}
 							onOptionClick={onOptionClick}
