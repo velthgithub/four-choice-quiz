@@ -1,8 +1,22 @@
 import React, { PropTypes } from 'react'
 
-const Option = ( {children, onClick} ) => {
+const Option = ( {children, onClick ,isCorrect, isSelected , isAnswered } ) => {
+	let className = 'four-choice-quiz-question__option';
+	if( isAnswered ) {
+		if(  isCorrect ) {
+			className = className + ' four-choice-quiz-question__option--correct';
+		}
+
+		if ( isSelected && !isCorrect ) {
+			className = className + ' four-choice-quiz-question__option--incorrect';
+		}
+	}
+
+
 	return (
-		<li onClick={onClick}
+		<li
+			className={className}
+			onClick={onClick}
 		>
 			{children}
 		</li>

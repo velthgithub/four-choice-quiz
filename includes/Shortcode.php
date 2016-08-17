@@ -55,7 +55,7 @@ class Shortcode {
 
 		$post = get_post($param['id']);
 		$content = $post->post_content;
-		return sprintf('<div class="four-choice-quiz"><div class="four-choice-quiz__description">%s</div><div class="four-choice-quiz-app" data-id="%d" data-currentid="%s"></div></div>',
+		return sprintf('<div class="four-choice-quiz"><p class="four-choice-quiz__description">%s</p><div class="four-choice-quiz-app" data-id="%d" data-currentid="%s"></div></div>',
 			$content,
 			$param['id'],
 			get_the_ID()
