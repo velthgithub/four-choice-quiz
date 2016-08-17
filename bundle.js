@@ -36216,6 +36216,26 @@ var question = function question(state, action) {
 	}
 };
 
+var shuffle = function shuffle(array) {
+	var counter = array.length;
+
+	// While there are elements in the array
+	while (counter > 0) {
+		// Pick a random index
+		var index = Math.floor(Math.random() * counter);
+
+		// Decrease counter by 1
+		counter--;
+
+		// And swap the last element with it
+		var temp = array[counter];
+		array[counter] = array[index];
+		array[index] = temp;
+	}
+
+	return array;
+};
+
 var questions = function questions() {
 	var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 	var action = arguments[1];
@@ -36224,9 +36244,9 @@ var questions = function questions() {
 		case _ActionType2.default.RECEIVE_DATA:
 			var _questions = action.data.fcq.questions;
 			_questions.map(function (q) {
-				q.options = q.options.map(function (value, index) {
+				q.options = shuffle(q.options.map(function (value, index) {
 					return { index: index, value: value };
-				});
+				}));
 				return q;
 			});
 
