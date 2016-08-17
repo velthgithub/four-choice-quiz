@@ -2,7 +2,7 @@
 
 namespace Torounit\FCQ;
 
-class Fields {
+class AdminFields {
 
 	/** @var \CMB2 */
 	private $cmb2;
@@ -106,7 +106,7 @@ class Fields {
 
 		$this->cmb2->add_group_field( $image_box_id, [
 			'name'        => __( 'Threshold', 'four-choice-quiz' ),
-			'description' => __( 'Threshold of answers for image.', 'four-choice-quiz' ),
+			'description' => __( 'Threshold of answers for image. 0 is default image.', 'four-choice-quiz' ),
 			'id'          => 'threshold',
 			'type'        => 'text_small',
 			'default'     => '0',
