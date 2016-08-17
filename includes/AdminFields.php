@@ -26,6 +26,26 @@ class AdminFields {
 	}
 
 	public function register_questions_fields() {
+		$post_id = 0;
+		if( !empty( $_GET['post'] ) and intval( $_GET['post'] ) ) {
+			$post_id = intval( $_GET['post'] );
+		}
+
+		if( $post_id ) {
+			$this->cmb2->add_field( [
+				'id'   => 'FCQ_shortcode',
+				'name' => __( 'Shortcode', 'four-choice-quiz' ),
+				'id'   => 'shortcode',
+				'type' => 'text',
+				'default'=> '[four-choice-quiz id='.$post_id.']',
+				'attributes' => [
+					'readonly' => true
+				]
+
+			]);
+
+		}
+
 		$question_box_id = $this->cmb2->add_field( [
 			'id'      => 'FCQ_question',
 			'type'    => 'group',
