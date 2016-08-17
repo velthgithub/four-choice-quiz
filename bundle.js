@@ -35782,19 +35782,19 @@ var Question = function (_React$Component) {
 				_react2.default.createElement(
 					'ol',
 					{ className: 'four-choice-quiz-question__options' },
-					options.map(function (option, index) {
+					options.map(function (option) {
 						return _react2.default.createElement(
 							_Option2.default,
 							{
-								key: index,
+								key: option.index,
 								onClick: function onClick() {
-									return onOptionClick(questionID, index);
+									return onOptionClick(questionID, option.index);
 								},
 								isAnswered: _this2.isAnswered(),
-								isSelected: userAnswer == index + 1,
-								isCorrect: answer == index + 1
+								isSelected: userAnswer == option.index + 1,
+								isCorrect: answer == option.index + 1
 							},
-							option
+							option.value
 						);
 					})
 				),
@@ -36222,7 +36222,15 @@ var questions = function questions() {
 
 	switch (action.type) {
 		case _ActionType2.default.RECEIVE_DATA:
-			return action.data.fcq.questions;
+			var _questions = action.data.fcq.questions;
+			_questions.map(function (q) {
+				q.options = q.options.map(function (value, index) {
+					return { index: index, value: value };
+				});
+				return q;
+			});
+
+			return _questions;
 
 		case _ActionType2.default.ANSWER_QUESTION:
 			return state.map(function (s) {
