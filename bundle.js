@@ -35775,33 +35775,37 @@ var Question = function (_React$Component) {
 				'div',
 				{ className: 'four-choice-quiz-question ' + className },
 				_react2.default.createElement(
-					'h3',
-					null,
-					question
-				),
-				_react2.default.createElement(
-					'ol',
-					{ className: 'four-choice-quiz-question__options' },
-					options.map(function (option) {
-						return _react2.default.createElement(
-							_Option2.default,
-							{
-								key: option.index,
-								onClick: function onClick() {
-									return onOptionClick(questionID, option.index);
+					'div',
+					{ className: 'four-choice-quiz-question__box' },
+					_react2.default.createElement(
+						'h3',
+						{ className: 'four-choice-quiz-question__title' },
+						question
+					),
+					_react2.default.createElement(
+						'ol',
+						{ className: 'four-choice-quiz-question__options' },
+						options.map(function (option) {
+							return _react2.default.createElement(
+								_Option2.default,
+								{
+									key: option.index,
+									onClick: function onClick() {
+										return onOptionClick(questionID, option.index);
+									},
+									isAnswered: _this2.isAnswered(),
+									isSelected: userAnswer == option.index + 1,
+									isCorrect: answer == option.index + 1
 								},
-								isAnswered: _this2.isAnswered(),
-								isSelected: userAnswer == option.index + 1,
-								isCorrect: answer == option.index + 1
-							},
-							option.value
-						);
+								option.value
+							);
+						})
+					),
+					_react2.default.createElement(_Result2.default, {
+						isAnswered: this.isAnswered(),
+						isCorrect: this.isCorrect()
 					})
 				),
-				_react2.default.createElement(_Result2.default, {
-					isAnswered: this.isAnswered(),
-					isCorrect: this.isCorrect()
-				}),
 				_react2.default.createElement(
 					'p',
 					{
