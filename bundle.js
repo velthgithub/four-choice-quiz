@@ -35775,13 +35775,13 @@ var Question = function (_React$Component) {
 				'div',
 				{ className: 'four-choice-quiz-question ' + className },
 				_react2.default.createElement(
+					'h3',
+					{ className: 'four-choice-quiz-question__title' },
+					question
+				),
+				_react2.default.createElement(
 					'div',
 					{ className: 'four-choice-quiz-question__box' },
-					_react2.default.createElement(
-						'h3',
-						{ className: 'four-choice-quiz-question__title' },
-						question
-					),
 					_react2.default.createElement(
 						'ol',
 						{ className: 'four-choice-quiz-question__options' },
@@ -35808,7 +35808,7 @@ var Question = function (_React$Component) {
 				),
 				_react2.default.createElement(
 					'p',
-					{
+					{ className: 'four-choice-quiz-question__comment',
 						style: {
 							display: this.isAnswered() ? 'block' : 'none'
 						}
@@ -35857,7 +35857,11 @@ var Result = function Result(_ref) {
 			{
 				className: "four-choice-quiz-question__result four-choice-quiz-question__result--correct"
 			},
-			"正解！"
+			_react2.default.createElement(
+				"span",
+				{ className: "four-choice-quiz-question__result-text" },
+				"正解！"
+			)
 		);
 	} else {
 		return _react2.default.createElement(
@@ -35865,7 +35869,11 @@ var Result = function Result(_ref) {
 			{
 				className: "four-choice-quiz-question__result four-choice-quiz-question__result--incorrect"
 			},
-			"不正解！"
+			_react2.default.createElement(
+				"span",
+				{ className: "four-choice-quiz-question__result-text" },
+				"不正解！"
+			)
 		);
 	}
 };
