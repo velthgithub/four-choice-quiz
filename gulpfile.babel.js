@@ -16,7 +16,7 @@ gulp.task('copy', function() {
 			'./*.json',
 			'./*.txt',
 			'./*.md',
-			'./assets',
+			'./assets/**',
 			"!./dist/**",
 			"./vendor/**",
 			"!./node_modules/**/*.*"
