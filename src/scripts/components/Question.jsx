@@ -22,24 +22,26 @@ class Question extends React.Component {
 
 		return (
 			<div className={'four-choice-quiz-question ' + className}>
-				<h3>{question}</h3>
-				<ol className="four-choice-quiz-question__options">
-					{options.map((option) =>
-						<Option
-							key={option.index}
-							onClick={() => onOptionClick(questionID, option.index)}
-							isAnswered={this.isAnswered()}
-							isSelected={(userAnswer == option.index + 1)}
-							isCorrect={(answer == option.index + 1)}
-						>
-							{option.value}
-						</Option>
-					)}
-				</ol>
-				<Result
-					isAnswered={this.isAnswered()}
-					isCorrect={this.isCorrect()}
-				/>
+				<div className="four-choice-quiz-question__box">
+					<h3  className="four-choice-quiz-question__title">{question}</h3>
+					<ol className="four-choice-quiz-question__options">
+						{options.map((option) =>
+							<Option
+								key={option.index}
+								onClick={() => onOptionClick(questionID, option.index)}
+								isAnswered={this.isAnswered()}
+								isSelected={(userAnswer == option.index + 1)}
+								isCorrect={(answer == option.index + 1)}
+							>
+								{option.value}
+							</Option>
+						)}
+					</ol>
+					<Result
+						isAnswered={this.isAnswered()}
+						isCorrect={this.isCorrect()}
+					/>
+				</div>
 				<p
 					style={{
 						display: this.isAnswered() ? 'block' : 'none'

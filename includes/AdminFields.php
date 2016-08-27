@@ -35,7 +35,6 @@ class AdminFields {
 			$this->cmb2->add_field( [
 				'id'   => 'FCQ_shortcode',
 				'name' => __( 'Shortcode', 'four-choice-quiz' ),
-				'id'   => 'shortcode',
 				'type' => 'text',
 				'default'=> '[four-choice-quiz id='.$post_id.']',
 				'attributes' => [
