@@ -11,7 +11,7 @@ const Result = ( { isAnswered, isCorrect } ) => {
 			<div 
 				className="four-choice-quiz-question__result four-choice-quiz-question__result--correct"
 			>
-				正解！
+				<span className="four-choice-quiz-question__result-text">正解！</span>
 			</div>
 		)
 	}
@@ -20,7 +20,8 @@ const Result = ( { isAnswered, isCorrect } ) => {
 			<div
 				className="four-choice-quiz-question__result four-choice-quiz-question__result--incorrect"
 			>
-				不正解！
+
+				<span className="four-choice-quiz-question__result-text">不正解！</span>
 			</div>
 		)
 	}

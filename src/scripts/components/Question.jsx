@@ -22,8 +22,8 @@ class Question extends React.Component {
 
 		return (
 			<div className={'four-choice-quiz-question ' + className}>
+				<h3  className="four-choice-quiz-question__title">{question}</h3>
 				<div className="four-choice-quiz-question__box">
-					<h3  className="four-choice-quiz-question__title">{question}</h3>
 					<ol className="four-choice-quiz-question__options">
 						{options.map((option) =>
 							<Option
@@ -42,7 +42,7 @@ class Question extends React.Component {
 						isCorrect={this.isCorrect()}
 					/>
 				</div>
-				<p
+				<p className="four-choice-quiz-question__comment"
 					style={{
 						display: this.isAnswered() ? 'block' : 'none'
 					}}
