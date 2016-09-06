@@ -21,7 +21,9 @@ class Result {
 		add_action( 'query_vars', [ $this, 'add_point_query_var' ] );
 		add_filter( 'the_content', [ $this, 'the_content' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
-		add_filter( 'jetpack_images_get_images', [ $this, 'jetpack_images_get_images' ], 10, 3 );
+		//add_filter( 'jetpack_images_get_images', [ $this, 'jetpack_images_get_images' ], 10, 3 );
+		add_filter( 'get_post_metadata', [ $this, 'get_post_metadata'], 10, 4 );
+
 	}
 
 	public function add_point_query_var( $vars ) {
@@ -35,6 +37,30 @@ class Result {
 		$point = get_query_var( 'point', 0 );
 
 		return intval( $point );
+	}
+
+	public function get_post_metadata( $metadata, $post_id, $meta_key, $single ) {
+
+		if ( is_admin() ) {
+			return $metadata;
+		}
+
+		$post = get_post( $post_id );
+		if ( 'quiz' != get_post_type( $post ) ) {
+			return $metadata;
+		}
+
+		if( $meta_key == '_thumbnail_id' ) {
+			$filtered = array_filter( $this->get_images( $post_id ), function ( $image ) {
+				return ( $image['threshold'] <= $this->get_point() );
+			} );
+
+			if( !empty( $filtered ) ) {
+				$result = end( $filtered );
+				return $result['image_id'];
+			}
+		}
+		return $metadata;
 	}
 
 	/**
